@@ -207,6 +207,13 @@
                     $(_self).find('div').eq(0).removeClass()
                 }, 1000);
             })
+            $(this).find('a').on('mouseleave ',function(e){
+                $(_self).find('div').eq(0).css({display:'none'})
+//                $(_self).find('div').eq(0).addClass('rotateIn animated infinite')
+//                setTimeout(function(){
+//                    $(_self).find('div').eq(0).removeClass()
+//                }, 1000);
+            })
         })
 
     })
