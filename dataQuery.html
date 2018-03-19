@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="./css/reset.css">
+    <link rel="stylesheet" href="./css/index.css">
+    <link rel="stylesheet" href="./css/animate.min.css">
+    <script type="text/javascript" src="js/jquery-1.11.0.min.js"></script>
+</head>
+<body class="body-bg">
+<div class="data-query-top">
+    <a>搜索历史</a><a>查询任务</a><a>退出登录</a>
+</div>
+<div class="data-query-logo"></div>
+<div class="query-search-wrap">
+    <input type="text" placeholder="姓名+身份证查询" disabled="true">
+</div>
+<!--<div class="modal-wrap-wai">-->
+<!--<div class="modal-wrap-zhe"></div>-->
+<!--<div class="query-input-modal">-->
+<!--<div class="query-input-modal-header">-->
+<!--提交查询-->
+<!--<div class="query-input-close"></div>-->
+<!--</div>-->
+<!--<div class="query-modal-content">-->
+<!--<p>请输入姓名或身份证号进行查询，姓名身份证用“，”、“/”隔开。如需多个输入-->
+<!--请按“enter”换行或“；”。</p>-->
+<!--<textarea id="query-content"></textarea>-->
+<!--</div>-->
+<!--<div class="query-modal-footer">-->
+<!--提交查询-->
+<!--</div>-->
+<!--</div>-->
+<!--</div>-->
+<div class="query-history">
+    <div class="dialog-box">
+        5555
+        <span class="bot"></span>
+    </div>
+</div>
+<div class="query-list">查询分类</div>
+<div class="query-list-leibie">
+    <div class="query-list-a ">
+        <div></div>
+        <a>
+            <div class="query-list-wrap">
+                <div class="house-zhez"></div>
+                <div class="house-warp">
+                    <div class="house-bg"></div>
+                    <div class="query-list-ds">房产</div>
+                </div>
+            </div>
+        </a>
+    </div>
+    <div class="query-list-a">
+        <div></div>
+        <a>
+            <div class="query-list-wrap">
+                <div class="house-zhez"></div>
+                <div class="house-warp">
+                    <div class="car-bg"></div>
+                    <div class="query-list-ds">车辆</div>
+                </div>
+            </div>
+        </a>
+    </div>
+    <div class="query-list-a">
+        <div></div>
+        <a>
+            <div class="query-list-wrap">
+                <div class="house-zhez"></div>
+                <div class="house-warp">
+                    <div class="property-bg"></div>
+                    <div class="query-list-ds">财产</div>
+                </div>
+            </div>
+        </a>
+    </div>
+    <div class="query-list-a">
+        <div></div>
+        <a>
+            <div class="query-list-wrap">
+                <div class="house-zhez"></div>
+                <div class="house-warp">
+                    <div class="enterprise-bg"></div>
+                    <div class="query-list-ds">企业</div>
+                </div>
+            </div>
+        </a>
+    </div>
+    <div class="query-list-a">
+        <div></div>
+        <a>
+            <div class="query-list-wrap">
+                <div class="house-zhez"></div>
+                <div class="house-warp">
+                    <div class="business-bg"></div>
+                    <div class="query-list-ds">商家</div>
+                </div>
+            </div>
+        </a>
+    </div>
+    <div class="query-list-a">
+        <div></div>
+        <a>
+            <div class="query-list-wrap">
+                <div class="house-zhez"></div>
+                <div class="house-warp">
+                    <div class="government-bg"></div>
+                    <div class="query-list-ds">政府</div>
+                </div>
+            </div>
+        </a>
+    </div>
+    <div class="query-list-a">
+        <div></div>
+        <a>
+            <div class="query-list-wrap">
+                <div class="house-zhez"></div>
+                <div class="house-warp">
+                    <div class="insurance-bg"></div>
+                    <div class="query-list-ds">保险</div>
+                </div>
+            </div>
+        </a>
+    </div>
+</div>
+<div class="query-list-bottom">Copyright © 2018 . All rights reserved</div>
+<script type="text/javascript">
+    $(function () {
+        var modalTan = $('<div class="modal-wrap-wai">' +
+            '<div class="modal-wrap-zhe"></div>' +
+            '<div class="query-input-modal">' +
+            '<div class="query-input-modal-header">' +
+            '提交查询' +
+            '<div class="query-input-close"></div>' +
+            '</div>' +
+            '<div class="query-modal-content">' +
+            '<p>请输入姓名或身份证号进行查询，姓名身份证用“，”、“/”隔开。如需多个输入请按“enter”换行或“；”。</p>' +
+            '<textarea id="query-content"></textarea>' +
+            '</div>' +
+            '<div class="query-modal-footer"> 提交查询 </div>' +
+            '</div>' +
+            '</div>');
+        var modalSuceess = $('<div class="modal-wrap-wai">' +
+            '<div class="modal-wrap-zhe"></div>' +
+            '<div class="query-input-modal-huikui">' +
+            '<div class="query-input-modal-header-huikui">' +
+            '<div class="huikui-close"></div>' +
+            '</div>' +
+            '<div class="query-huikui-content">' +
+            '<div class="huikui-prompt">提交成功</div>' +
+            '<div class="query-huikui-succes-img"></div>' +
+            '<p>您的查询任务已经提交，请等待数据回调。您也可以查看<a>查询任务</a></p>' +
+            '</div>' +
+            '<div class="huikui-footer">返回首页</div>' +
+            '</div>' +
+
+            '</div>');
+        var modalError = $('<div class="modal-wrap-wai">' +
+            '<div class="modal-wrap-zhe"></div>' +
+            '<div class="query-input-modal-huikui">' +
+            '<div class="query-input-modal-header-huikui">' +
+            '<div class="huikui-close"></div>' +
+            '</div>' +
+            '<div class="query-huikui-content">' +
+            '<div class="huikui-prompt">提交失败</div>' +
+            '<div class="query-huikui-error-img"></div>' +
+            '<p>您的查询任务提交失败，请检查一下您的网络，您也可以查看<a>查询任务</a></p>' +
+            '</div>' +
+            '<div class="huikui-footer">重新提交</div>' +
+            '</div>' +
+
+            '</div>');
+        var querySearchWrap = $('.query-search-wrap');
+
+        querySearchWrap.on('click', function (e) {
+            $('body').append(modalTan);
+            var modalWrapWai = $('.modal-wrap-wai'),
+                queryContent = $('#query-content');
+            $('.query-input-close').on('click', function (e) {
+                $('.modal-wrap-wai').remove();
+            })
+            $('.query-modal-footer').on('click', function (e) {
+                console.log(queryContent.val());
+                $.ajax({
+                    url: '',
+                    data: '',
+                    type: 'get',
+                    success: function (data) {
+                        console.log('data', data)
+                    },
+                    error: function (e) {
+
+                    }
+                })
+            })
+
+        })
+        $('.query-list-a').each(function(index,item) {
+            var _self = this;
+            $(this).find('a').on('mouseenter ',function(e){
+                $(_self).find('div').eq(0).css({display:'block'})
+                $(_self).find('div').eq(0).addClass('rotateIn animated infinite')
+                setTimeout(function(){
+                    $(_self).find('div').eq(0).removeClass()
+                }, 1000);
+            })
+        })
+
+    })
+</script>
+</body>
+</html>
