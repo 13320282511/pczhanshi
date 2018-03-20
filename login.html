@@ -26,8 +26,8 @@
                 </div>
                 <div class="login-select-data">
                     <div class="login-remember">
-                        <input type="checkbox">
-                        <label>7天内免登录</label>
+                        <input type="checkbox" id="timesave" hidden>
+                        <label for="timesave" class="checkok"></label><span>7天内免登录</span>
                     </div>
                     <div class="login-error-message">请输入正确的账号或密码！</div>
                 </div>
@@ -60,7 +60,7 @@
             if($(e.target).hasClass('login-no-button')){
                 return false;
             }
-            if(userName.val() != '234'){
+            if(userName.val() != 'admin' && passWord.val() != 'admin'){
                 loginError.css({display:'block'})
             } else {
                 loginError.css({display:'none'})

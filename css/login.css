@@ -98,8 +98,13 @@ html{
 }
 .login-remember{
     flex:1;
+    display: flex;
+    align-items: center;
 }
 .login-remember>label{
+    margin-right: 10px;
+}
+.login-remember>span{
     font-size: 14px;
     color: #142f77;
 }
@@ -110,6 +115,7 @@ html{
     font-size: 14px;
     color: #142f77;
     display: none;
+    padding-top: 2px;
 }
 .login-button{
     height: 60px;
@@ -146,6 +152,7 @@ html{
     height: 72px;
     right: -476px;
     bottom: 560px;
+    animation-duration:2s;
 }
 .guang-first2{
     background: url("../images/amation2.png") no-repeat center center;
@@ -163,7 +170,7 @@ html{
     height: 72px;
     right: -476px;
     bottom: 360px;
-    animation-duration:2s;
+    animation-duration:3s;
 }
 .tubiao{
     background: url("../images/tubiao.png") no-repeat center center;
@@ -174,4 +181,16 @@ html{
     top:50%;
     left:270px;
     transform: translate(0,-50%);
+}
+#timesave{}
+#timesave + label{
+    width: 15px;
+    height: 15px;
+    border-radius: 5px;
+    background-color: transparent;
+    border: 1px solid #142f77;
+    display: inline-block;
+}
+#timesave:checked + label{
+    background: url("../images/checkok.png") no-repeat center center;
 }

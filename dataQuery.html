@@ -1,4 +1,5 @@
-<!DOCTYPE html>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -34,9 +35,35 @@
 <!--</div>-->
 <!--</div>-->
 <div class="query-history">
-    <div class="dialog-box">
-        5555
-        <span class="bot"></span>
+    <div class="dataList1 lightSpeedIn animated">
+        <div class="dialog-box">
+            5555
+            <span class="bot"></span>
+        </div>
+    </div>
+    <div class="dataList2 lightSpeedIn animated">
+        <div class="dialog-box">
+            5555
+            <span class="bot"></span>
+        </div>
+    </div>
+    <div class="dataList3 lightSpeedIn animated">
+        <div class="dialog-box">
+            5555
+            <span class="bot"></span>
+        </div>
+    </div>
+    <div class="dataList4 lightSpeedIn animated">
+        <div class="dialog-box">
+            5555
+            <span class="bot"></span>
+        </div>
+    </div>
+    <div class="dataList5 lightSpeedIn animated">
+        <div class="dialog-box">
+            5555
+            <span class="bot"></span>
+        </div>
     </div>
 </div>
 <div class="query-list">查询分类</div>
@@ -138,6 +165,7 @@
             '</div>' +
             '<div class="query-modal-content">' +
             '<p>请输入姓名或身份证号进行查询，姓名身份证用“，”、“/”隔开。如需多个输入请按“enter”换行或“；”。</p>' +
+                '<input placeholder="请输入添加的查询任务名称" class="dataquery-tagname"/>'+
             '<textarea id="query-content"></textarea>' +
             '</div>' +
             '<div class="query-modal-footer"> 提交查询 </div>' +
@@ -152,7 +180,7 @@
             '<div class="query-huikui-content">' +
             '<div class="huikui-prompt">提交成功</div>' +
             '<div class="query-huikui-succes-img"></div>' +
-            '<p>您的查询任务已经提交，请等待数据回调。您也可以查看<a>查询任务</a></p>' +
+            '<p>您的查询任务已经提交，请等待数据回调。您也可以查看<a href="dataList.html">查询任务</a></p>' +
             '</div>' +
             '<div class="huikui-footer">返回首页</div>' +
             '</div>' +
@@ -167,48 +195,104 @@
             '<div class="query-huikui-content">' +
             '<div class="huikui-prompt">提交失败</div>' +
             '<div class="query-huikui-error-img"></div>' +
-            '<p>您的查询任务提交失败，请检查一下您的网络，您也可以查看<a>查询任务</a></p>' +
+            '<p>您的查询任务提交失败，请检查一下您的网络，您也可以查看<a href="dataList.html">查询任务</a></p>' +
             '</div>' +
             '<div class="huikui-footer">重新提交</div>' +
             '</div>' +
 
             '</div>');
+        /*$.ajax({
+            url:'http://192.168.234.29:8080/api/service/house/showQuery',
+            type:'POST',
+            dataType:'json',
+            success:function(data){
+                console.log('data1',data)
+            },
+            error:function(res){
+                console.log('res',res)
+            },
+            complete:function(xhr,js){
+                console.log('xhr',xhr)
+                console.log('js',js)
+            },
+        })*/
+        // $.post('http://192.168.234.29:8080/api/service/house/showQuery',{},function(data){
+        //     console.log(data,'*-*-*');
+        // });
         var querySearchWrap = $('.query-search-wrap');
-
-        querySearchWrap.on('click', function (e) {
+        function submitModal(){
             $('body').append(modalTan);
-            var modalWrapWai = $('.modal-wrap-wai'),
-                queryContent = $('#query-content');
+            var modalWrapWai = $('.modal-wrap-wai');
             $('.query-input-close').on('click', function (e) {
                 $('.modal-wrap-wai').remove();
             })
             $('.query-modal-footer').on('click', function (e) {
-                console.log(queryContent.val());
+                var queryContent = $('#query-content'),
+                    dataTagname = $('.dataquery-tagname');
+                var data = {},
+                    reg=new RegExp("\n","g"),
+                    reg1=new RegExp(";","g");
+                data['LIST'] = [];
+                queryContent = queryContent.val();
+                str= queryContent.replace(reg,"<br>");
+                str1 = str.replace(reg1,"<br>");
+                console.log('str1',str1)
+                var strArray = str1.split('<br>');
+                for(var i=0;i<strArray.length;i++) {
+                    var strArrayOne = strArray[i].split(',');
+                    if(!strArrayOne[1] && !strArrayOne[0]){
+
+                    }else{
+                        data['LIST'].push({'IDCARD':strArrayOne[1],'NAME':strArrayOne[0]})
+                    }
+
+                }
+                data['TASK_NAME'] = dataTagname.val();
+                console.log('data',data)
+                $('.modal-wrap-wai').remove();
                 $.ajax({
-                    url: '',
-                    data: '',
-                    type: 'get',
+                    url: 'http://192.168.234.29:8080/api/service/house/addQuery',
+                    data: JSON.stringify(data),
+                    type: 'POST',
+                    dataType:'text',
+                    complete:function(xhr){
+                        console.log('xhr',xhr)
+                    },
                     success: function (data) {
                         console.log('data', data)
+                        $('body').append(modalSuceess);
+                        $('.huikui-close').on('click',function(e){
+                            $('.modal-wrap-wai').remove();
+                        })
                     },
-                    error: function (e) {
-
+                    error: function (error) {
+                        console.log(error)
+                        $('body').append(modalError);
+                        $('.huikui-close').on('click',function(e){
+                            $('.modal-wrap-wai').remove();
+                        })
+                        $('.huikui-footer').on('click',function(e){
+                            submitModal()
+                        })
                     }
                 })
             })
+        }
+        querySearchWrap.on('click', function (e) {
+            submitModal()
 
         })
-        $('.query-list-a').each(function(index,item) {
+        $('.query-list-a').each(function (index, item) {
             var _self = this;
-            $(this).find('a').on('mouseenter ',function(e){
-                $(_self).find('div').eq(0).css({display:'block'})
+            $(this).find('a').on('mouseenter ', function (e) {
+                $(_self).find('div').eq(0).css({display: 'block'})
                 $(_self).find('div').eq(0).addClass('rotateIn animated infinite')
-                setTimeout(function(){
+                setTimeout(function () {
                     $(_self).find('div').eq(0).removeClass()
                 }, 1000);
             })
-            $(this).find('a').on('mouseleave ',function(e){
-                $(_self).find('div').eq(0).css({display:'none'})
+            $(this).find('a').on('mouseleave ', function (e) {
+                $(_self).find('div').eq(0).css({display: 'none'})
 //                $(_self).find('div').eq(0).addClass('rotateIn animated infinite')
 //                setTimeout(function(){
 //                    $(_self).find('div').eq(0).removeClass()

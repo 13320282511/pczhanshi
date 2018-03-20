@@ -1,14 +1,356 @@
-.data-list-table>tbody>tr{
+.data-list-table > tbody > tr {
     background-color: #fff;
     line-height: 50px;
-    height:50px;
+    height: 50px;
     font-size: 14px;
     color: #333;
 }
-.data-list-table>tbody>tr:nth-of-type(odd){
+
+.data-list-table > tbody > tr:nth-of-type(even) {
     background-color: #EEF5FF;
 }
-.table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th{
+
+.table > thead > tr {
+    background-color: #EEF5FF;
+}
+
+.table > tbody > tr > td, .table > tbody > tr > th, .table > tfoot > tr > td, .table > tfoot > tr > th, .table > thead > tr > td, .table > thead > tr > th {
     line-height: 50px;
     padding: 0;
+    border: none;
+}
+
+.table > tbody > tr {
+    cursor: pointer;
+}
+
+.data-list-table {
+    margin-bottom: 30px;
+}
+.datalist-show{
+    width: 1200px;
+    margin: 0 auto;
+    border: 1px solid #eee;
+    box-shadow: 0px 0px 10px #666;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+.table tr td:first-child {
+    text-align: center;
+}
+.table tr td{
+    position: relative;
+}
+.table tr td>a{
+    display: none;
+}
+.datalist-top {
+    background-color: #1f74f2;
+    height: 70px;
+    margin-bottom: 30px;
+}
+
+.datalist-inner {
+    width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+}
+
+.datalist-inner-left {
+    flex: 1;
+    background: url("../images/datalist-logo.png") no-repeat left center;
+    height: 70px;
+    padding-left: 100px;
+    align-items: center;
+    display: flex;
+}
+
+.datalist-left-search {
+    width: 350px;
+    height: 40px;
+    display: flex;
+    background-color: #fff;
+}
+
+.datalist-left-search > input {
+    flex: 1;
+    outline: none;
+    padding: 0 20px;
+    height: 100%;
+    font-size: 14px;
+    color: #333;
+}
+
+.datalist-query-icon {
+    background: url("../images/query-btn.png") no-repeat center center;
+    height: 40px;
+    width: 54px;
+    cursor: pointer;
+}
+
+.datalist-inner-right {
+    line-height: 70px;
+}
+
+.datalist-inner-right > a {
+    font-size: 14px;
+    color: #cbcbcb;
+    display: inline-block;
+    margin-left: 30px;
+    cursor: pointer;
+}
+
+.datalist-inner-right > a.aclick {
+    color: #fff;
+}
+
+.datalist-time {
+    font-size: 0;
+    height: 30px;
+    width: 1200px;
+    margin: 0 auto;
+    margin-bottom: 20px;
+}
+
+.datalist-time > label {
+    display: inline-block;
+    font-size: 14px;
+    color: #666;
+    font-weight: 100;
+    margin-right: 10px;
+}
+
+.datalist-time > span {
+    display: inline-block;
+    font-size: 14px;
+    color: #333;
+    line-height: 30px;
+    padding: 0 15px;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.datalist-time > span.spanclick {
+    background-color: #89b9ff;
+    color: #fff;
+    border-radius: 5px;
+}
+
+.datalist-status {
+    font-size: 0;
+    height: 30px;
+    width: 1200px;
+    margin: 0 auto;
+    margin-bottom: 30px;
+}
+
+.datalist-status > label {
+    display: inline-block;
+    font-size: 14px;
+    color: #666;
+    font-weight: 100;
+    margin-right: 10px;
+}
+
+.datalist-status > span {
+    display: inline-block;
+    font-size: 14px;
+    color: #333;
+    line-height: 30px;
+    padding: 0 15px;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.datalist-status > span.spanclick {
+    background-color: #89b9ff;
+    color: #fff;
+    border-radius: 5px;
+}
+
+.datalist-pending {
+    color: #1f74f2;
+}
+
+.datalist-computed {
+    color: #8dd41f;
+    display: flex;
+    align-items: center;
+}
+
+.datalist-computed:before {
+    display: block;
+    content: " ";
+    width: 16px;
+    height: 16px;
+    background: url("../images/list-computed.png") no-repeat left center;
+    margin-right: 10px;
+}
+.table tr td.list-hover>a{
+    display: block;
+    position: absolute;
+    right: 30px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #333;
+}
+.data-list-footer{
+    height: 60px;
+    line-height: 60px;
+    color: #fff;
+    text-align: center;
+    background-color: #1f74f2;
+    font-size: 14px;
+}
+.pager-datalist{
+    width: 1200px;
+    margin: 0 auto;
+    margin-bottom: 30px;
+}
+.pager-datalist>nav{
+    text-align: center;
+}
+.pager-datalist>nav li{
+    display: inline-block;
+    margin-right: 14px;
+}
+
+
+.datalist-detail{
+    width: 1200px;
+    margin: 0 auto;
+}
+.datalist-detail-table{
+    width: 1200px;
+    margin: 0 auto;
+    box-shadow: 0 0 10px #666;
+}
+.datalist-detail tr td{
+    /*display: flex;*/
+    /*align-items: center;*/
+    vertical-align: middle;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+.datalist-detail tbody tr{
+    border-bottom: 1px solid #eee;
+}
+.datalist-detail tr td:nth-child(1){
+    /*display: flex;*/
+    /*align-items: center;*/
+}
+/*.datalist-detail tr td:after{*/
+    /*display: block;*/
+    /*content: " ";*/
+    /*height: 60px;*/
+    /*width: 1px;*/
+    /*background-color: #efefef;*/
+/*}*/
+.datalist-detail tr td:last-child{
+    padding: 0 25px;
+}
+.datalist-detail-img{
+    width: 60px;
+    height: 60px;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+.datalist-detail-img img{
+    display: block;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+}
+.datalist-detail-name{
+    flex: 1;
+    height: 60px;
+    display: flex;
+   justify-content: center;
+    flex-direction: column;
+}
+.datalist-detail-name h1{
+    font-size: 24px;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+.datalist-detail-name span{
+    color: #333;
+    font-size: 16px;
+}
+.datalist-detail-td{
+    display: flex;
+    align-items: center;
+    height: 100%;
+}
+.datalist-detail-td:after{
+    display: block;
+    content: " ";
+    height: 60px;
+    width: 1px;
+    background-color: #efefef;
+}
+.datalist-detail-tdtwo{
+    display: flex;
+    align-items: center;
+    padding: 0 0 0 20px;
+}
+.datalist-detail-tdtwo:after{
+    display: block;
+    content: " ";
+    height: 60px;
+    width: 1px;
+    background-color: #efefef;
+    margin-left: 20px;
+}
+.datalist-detail-diva{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.datalist-detail-diva>a{
+    width: 80px;
+    height: 24px;
+    line-height: 24px;
+    border: 1px solid #f7f7f7;
+    text-align: center;
+    font-size: 12px;
+    color: #666;
+}
+.datalist-detail-diva>a:first-child{
+    margin-bottom: 10px;
+}
+.datalist-detail-time{
+    height: 66px;
+    line-height: 66px;
+    padding-left: 20px;
+}
+.datalist-detail-time>span{
+    font-size: 14px;
+    color: #666;
+    margin-right: 20px;
+}
+.divh5{
+    height: 5px;
+    background-color: #f6f6f6;
+}
+.datalist-detail-bread{
+    width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    margin-bottom: 25px;
+    align-items: center;
+}
+.datalist-detail-bread:before{
+    display: block;
+    content: "";
+    background: url('../images/datalist-address.png') no-repeat left center;
+    width: 14px;
+    height: 14px;
+    margin-right: 15px;
+}
+.datalist-detail-bread>a{
+    font-size: 14px;
+    color: #666;
 }

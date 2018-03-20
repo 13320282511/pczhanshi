@@ -9,46 +9,119 @@
     <script type="text/javascript" src="js/jquery-1.11.0.min.js"></script>
 </head>
 <body>
-<div>
-    <div></div>
-    <table class="table table-hover data-list-table" style="width: 1200px;margin: 0 auto;">
-        <thead>
-        <tr>
-            <td>序号</td>
-            <td>查询对象</td>
-            <td>创建时间</td>
-            <td>查询时间</td>
-            <td>查询状态</td>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-            <td>1</td>
-            <td>张三</td>
-            <td>2013-3-16</td>
-            <td>2018-3-16</td>
-            <td>待查询</td>
-        </tr>
-        <tr>
-            <td>2</td>
-            <td>张三</td>
-            <td>2013-3-16</td>
-            <td>2018-3-16</td>
-            <td>待查询</td>
-        </tr>
-        <tr>
-            <td>3</td>
-            <td>张三</td>
-            <td>2013-3-16</td>
-            <td>2018-3-16</td>
-            <td>待查询</td>
-        </tr>
-        </tbody>
-    </table>
-
+<div class="datalist-top">
+    <div class="datalist-inner">
+        <div class="datalist-inner-left">
+            <div class="datalist-left-search">
+                <input type="text">
+                <div class="datalist-query-icon"></div>
+            </div>
+        </div>
+        <div class="datalist-inner-right">
+            <a class="aclick">查询任务</a>
+            <a>退出登录</a>
+        </div>
+    </div>
 </div>
+<div>
+    <div class="datalist-time">
+        <label>时间:</label>
+        <span class="spanclick">全部</span>
+        <span>近7天</span>
+        <span>近半月</span>
+        <span>近一月</span>
+    </div>
+    <div class="datalist-status">
+        <label>状态:</label>
+        <span class="spanclick">全部</span>
+        <span>待查询</span>
+        <span>查询中</span>
+        <span>已完成</span>
+    </div>
+    <div class="datalist-show">
+        <table class="table data-list-table " style="width: 1200px;margin: 0 auto;">
+            <thead>
+            <tr>
+                <td>序号</td>
+                <td>查询对象</td>
+                <td>创建时间</td>
+                <td>查询时间</td>
+                <td>查询状态</td>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>1</td>
+                <td>张三</td>
+                <td>2013-3-16</td>
+                <td>2018-3-16</td>
+                <td>待查询<a>详情</a></td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>张三</td>
+                <td>2013-3-16</td>
+                <td>2018-3-16</td>
+                <td class="datalist-pending">查询中<a>详情</a></td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>张三</td>
+                <td>2013-3-16</td>
+                <td>2018-3-16</td>
+                <td class="datalist-computed">已完成<a>详情</a></td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td>张三</td>
+                <td>2013-3-16</td>
+                <td>2018-3-16</td>
+                <td class="datalist-computed">已完成<a>详情</a></td>
+            </tr>
+            </tbody>
+        </table>
+        <div class="pager-datalist">
+            <nav aria-label="...">
+                <ul class="pagination">
+                    <li class="disabled"><a href="#" aria-label="Previous"><span aria-hidden="true">上一页</span></a>
+                    </li>
+                    <li><a href="#">1 <span class="sr-only">(current)</span></a></li>
+                    <li><a href="#">2 <span class="sr-only">(current)</span></a></li>
+                    <li class="active"><a href="#">3</a></li>
+                    <li class="disabled"><a href="#" aria-label="Previous"><span aria-hidden="true">下一页</span></a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</div>
+<div class="data-list-footer">Copyright © 2018 All rights reserved 丨 技术支持：重庆慧耀科技</div>
 <script type="text/javascript">
-    $(function(){
+    $(function () {
+        var table = $('.data-list-table'),
+            dataTime = $('.datalist-time'),
+            dataStatus = $('.datalist-status');
+        dataTime.on('click', function (e) {
+            if (e.target.tagName.toLowerCase() == 'span') {
+                $(e.target).addClass('spanclick').siblings('span').removeClass('spanclick')
+            }
+        })
+        dataStatus.on('click', function (e) {
+            if (e.target.tagName.toLowerCase() == 'span') {
+                $(e.target).addClass('spanclick').siblings('span').removeClass('spanclick')
+            }
+        })
+        table.on('mouseover', function (e) {
+            if ($(e.target).closest('tr').length > 0) {
+                $($($(e.target).closest('tr')[0]).find('td')[4]).addClass('list-hover')
+            }
+        })
+        table.on('mouseout', function (e) {
+            if ($(e.target).closest('tr').length > 0) {
+                $($($(e.target).closest('tr')[0]).find('td')[4]).removeClass('list-hover')
+            }
+        })
+        var dataJson = [{}]
 
     })
 </script>
