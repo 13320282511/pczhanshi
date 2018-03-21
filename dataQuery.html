@@ -164,8 +164,8 @@
             '<div class="query-input-close"></div>' +
             '</div>' +
             '<div class="query-modal-content">' +
-            '<p>请输入姓名或身份证号进行查询，姓名身份证用“，”、“/”隔开。如需多个输入请按“enter”换行或“；”。</p>' +
-                '<input placeholder="请输入添加的查询任务名称" class="dataquery-tagname"/>'+
+            '<p>请输入姓名或身份证号进行查询，姓名身份证用“，”隔开。如需多个输入请按“enter”换行或“；”。</p>' +
+            '<input placeholder="请输入添加的查询任务名称" class="dataquery-tagname"/>' +
             '<textarea id="query-content"></textarea>' +
             '</div>' +
             '<div class="query-modal-footer"> 提交查询 </div>' +
@@ -201,26 +201,43 @@
             '</div>' +
 
             '</div>');
-        /*$.ajax({
-            url:'http://192.168.234.29:8080/api/service/house/showQuery',
-            type:'POST',
-            dataType:'json',
-            success:function(data){
-                console.log('data1',data)
+        $.ajax({
+            url: 'http://192.168.234.29:8080/api/service/house/showQuery',
+            type: 'POST',
+            dataType: 'json',
+            success: function (data) {
+                var list = data.LIST;
+                var frageMent = $(document.createDocumentFragment());
+                for (var i = 0; i < list.length; i++) {
+                    frageMent.append(fudong(list[i].NAME))
+                }
+                $('.query-history').append(frageMent);
+                console.log('data1', data)
             },
-            error:function(res){
-                console.log('res',res)
+            error: function (res) {
+                console.log('res', res)
             },
-            complete:function(xhr,js){
-                console.log('xhr',xhr)
-                console.log('js',js)
+            complete: function (xhr, js) {
+                console.log('xhr', xhr)
+                console.log('js', js)
             },
-        })*/
+        })
+
+        function fudong(number, name) {
+            $('<div class="dataList1' + number + ' lightSpeedIn animated">' +
+                '                <div class="dialog-box">' +
+                +name +
+                '                <span class="bot"></span>' +
+                '                </div>' +
+                '                </div>')
+        }
+
         // $.post('http://192.168.234.29:8080/api/service/house/showQuery',{},function(data){
         //     console.log(data,'*-*-*');
         // });
         var querySearchWrap = $('.query-search-wrap');
-        function submitModal(){
+
+        function submitModal() {
             $('body').append(modalTan);
             var modalWrapWai = $('.modal-wrap-wai');
             $('.query-input-close').on('click', function (e) {
@@ -230,54 +247,55 @@
                 var queryContent = $('#query-content'),
                     dataTagname = $('.dataquery-tagname');
                 var data = {},
-                    reg=new RegExp("\n","g"),
-                    reg1=new RegExp(";","g");
+                    reg = new RegExp("\n", "g"),
+                    reg1 = new RegExp(";", "g");
                 data['LIST'] = [];
                 queryContent = queryContent.val();
-                str= queryContent.replace(reg,"<br>");
-                str1 = str.replace(reg1,"<br>");
-                console.log('str1',str1)
+                str = queryContent.replace(reg, "<br>");
+                str1 = str.replace(reg1, "<br>");
+                console.log('str1', str1)
                 var strArray = str1.split('<br>');
-                for(var i=0;i<strArray.length;i++) {
+                for (var i = 0; i < strArray.length; i++) {
                     var strArrayOne = strArray[i].split(',');
-                    if(!strArrayOne[1] && !strArrayOne[0]){
+                    if (!strArrayOne[1] && !strArrayOne[0]) {
 
-                    }else{
-                        data['LIST'].push({'IDCARD':strArrayOne[1],'NAME':strArrayOne[0]})
+                    } else {
+                        data['LIST'].push({'IDCARD': strArrayOne[1], 'NAME': strArrayOne[0]})
                     }
 
                 }
                 data['TASK_NAME'] = dataTagname.val();
-                console.log('data',data)
+                console.log('data', data)
                 $('.modal-wrap-wai').remove();
                 $.ajax({
                     url: 'http://192.168.234.29:8080/api/service/house/addQuery',
                     data: JSON.stringify(data),
                     type: 'POST',
-                    dataType:'text',
-                    complete:function(xhr){
-                        console.log('xhr',xhr)
+                    dataType: 'text',
+                    complete: function (xhr) {
+                        console.log('xhr', xhr)
                     },
                     success: function (data) {
                         console.log('data', data)
                         $('body').append(modalSuceess);
-                        $('.huikui-close').on('click',function(e){
+                        $('.huikui-close').on('click', function (e) {
                             $('.modal-wrap-wai').remove();
                         })
                     },
                     error: function (error) {
                         console.log(error)
                         $('body').append(modalError);
-                        $('.huikui-close').on('click',function(e){
+                        $('.huikui-close').on('click', function (e) {
                             $('.modal-wrap-wai').remove();
                         })
-                        $('.huikui-footer').on('click',function(e){
+                        $('.huikui-footer').on('click', function (e) {
                             submitModal()
                         })
                     }
                 })
             })
         }
+
         querySearchWrap.on('click', function (e) {
             submitModal()
 
